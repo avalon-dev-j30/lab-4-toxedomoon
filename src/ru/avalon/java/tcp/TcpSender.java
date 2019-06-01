@@ -1,8 +1,9 @@
 package ru.avalon.java.tcp;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
-import java.net.Socket;
-import java.net.SocketAddress;
+import java.io.OutputStreamWriter;
+import java.net.*;
 
 /**
  * Упражнение на выработку базовых умений использования
@@ -34,7 +35,7 @@ public final class TcpSender {
         /*
          * TODO Реализовать метод prepareMessage класса TcpSender
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return "Prepare message from TCP Sender delivered to TCP Receiver!..";
     }
 
     /**
@@ -42,11 +43,11 @@ public final class TcpSender {
      *
      * @return экземпля типа {@link SocketAddress}
      */
-    private static SocketAddress prepareAddress() {
+    private static SocketAddress prepareAddress() throws UnknownHostException {
         /*
          * TODO Реализовать метод prepareAddress класса TcpSender
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return new InetSocketAddress(InetAddress.getLocalHost(), 6064);
     }
 
     /**
@@ -63,7 +64,9 @@ public final class TcpSender {
         /*
          * TODO Реализовать метод connect класса TcpSender
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        Socket socket = new Socket();
+        socket.connect(address);
+        return socket;
     }
 
     /**
@@ -78,7 +81,10 @@ public final class TcpSender {
         /*
          * TODO Реализовать метод send класса TcpSender
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        OutputStreamWriter stream = new OutputStreamWriter(socket.getOutputStream());
+        BufferedWriter writer = new BufferedWriter(stream);
+        writer.write(message);
+        writer.flush();
     }
 
 }
